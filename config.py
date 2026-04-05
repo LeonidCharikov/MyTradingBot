@@ -1,29 +1,47 @@
 TWELVEDATA_API_KEY = "73d64e27147645fe860fd03b3baf0290"
 TELEGRAM_BOT_TOKEN = "8685236865:AAEf9sChGMJeNZq5SXOyXhuRuOpD33or_vo"
-TELEGRAM_CHAT_ID = "1105239097"  
-
-SYMBOLS = {
-    "forex": [
-        "EUR/USD", "AUD/NZD", "EUR/JPY", "AUD/JPY",
-        "EUR/GBP", "GBP/JPY", "USD/CHF", "EUR/CAD"
-    ],
-    "indices": [],
-    "crypto": [],
-    "commodities": []
-}
+TELEGRAM_CHAT_ID = ["1105239097", "1630556346"]
  
 # Risk management
 MAX_DAILY_LOSSES = 7         # 7 prekyrti = stop (z PDF)
-MAX_TRADES_PER_DAY = 7       # Max signalu za den
+MAX_TRADES_PER_DAY = 30       # Max signalu za den
  
 MODE = "demo"                # "demo" nebo "real"
 SCAN_INTERVAL = 60           # Interval skenovani v sekundach
 INTERACTIVE_MODE = True
- 
+ # Vikend filter
+WEEKEND_FILTER_ENABLED = True
 # ============================================================
 # ANALYZA - parametry (zmenovat zde, ne v kodu)
 # ============================================================
  
+# Minimalni prah pro signal
+SIGNAL_MIN_CONDITIONS = 6    # Pod timto = zadny signal (ne VELMI SLABY)
+
+# Casove filtry (UTC cas)
+SESSION_LONDON_START = 7     # London open 07:00 UTC
+SESSION_LONDON_END = 16      # London close 16:00 UTC
+SESSION_NY_START = 13        # NY open 13:00 UTC
+SESSION_NY_END = 21          # NY close 21:00 UTC
+SESSION_FILTER_ENABLED = True # Zapnout/vypnout casovy filtr
+
+# EMA
+EMA_FAST = 8                 # Rychla EMA
+EMA_SLOW = 21                # Pomala EMA
+
+# Kanal
+CHANNEL_MIN_STOPS = 6        # Min sirka kanalu v stopech
+
+# Korelace
+CORRELATED_PAIRS = [
+    ["EUR/USD", "GBP/USD"],      # Silna pozitivni korelace
+    ["EUR/USD", "AUD/USD"],      # Stredni pozitivni korelace
+    ["EUR/USD", "USD/CHF"],      # Silna negativni korelace
+    ["GBP/USD", "AUD/USD"],      # Stredni pozitivni korelace
+    ["USD/JPY", "USD/CHF"],      # Stredni pozitivni korelace
+]
+CORRELATION_WARNING_THRESHOLD = 0.7  # Nad timto = upozorneni
+
 # ATR filtry
 ATR_MAX_USED = 0.90          # Max % ATR pouziteho za den (90% = stop)
 ATR_OPEN_CLOSE_MIN = 0.02    # Min rozdil open/close pro platny den
@@ -78,9 +96,10 @@ CHECKLIST_STOP_MULT = 1.5        # Stop = 1.5x ATR za uroven
 CHECKLIST_MIN_RRR = 1.0          # Min RRR 1:1
  
 # Sila signalu - pocet splnenych podminek
-SIGNAL_STRONG_MIN = 7        # SILNY = 7+ podminek
-SIGNAL_MEDIUM_MIN = 5        # STREDNI = 5-6 podminek
-SIGNAL_WEAK_MIN = 3          # SLABY = 3-4 podminky
+
+SIGNAL_STRONG_MIN = 12        # SILNY = 7+ podminek
+SIGNAL_MEDIUM_MIN = 59       # STREDNI = 5-6 podminek
+SIGNAL_WEAK_MIN = 6          # SLABY = 3-4 podminky
  
 # Cache - opakovana analyza stejneho symbolu
 CACHE_FAST_MINUTES = 5       # Pri opakovani pouzij data starsi max 5 min

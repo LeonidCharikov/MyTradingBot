@@ -114,14 +114,22 @@ def handle_updates():
                 paused = True
                 send_message("⏸️ Pauza. /start pro obnoveni.")
 
-            # Vysledky obchodu
             elif data == "result_win":
+                from trade_logger import update_last_result
+                update_last_result("win")
                 send_message("✅ Vyhra zaznamenana!")
                 send_main_menu()
+
             elif data == "result_loss":
+                from trade_logger import update_last_result
+                update_last_result("loss")
                 record_result("loss")
                 if not paused:
                     send_main_menu()
+
+            elif data == "result_skip":
+                send_message("⏭️ Signal preskocen.")
+                send_main_menu()
 
             elif data.startswith("analyze_"):
                 symbol = data.replace("analyze_", "")
@@ -130,15 +138,6 @@ def handle_updates():
             elif data == "stats":
                 from trade_logger import get_stats
                 send_message(get_stats())
-            elif data == "result_win":
-                from trade_logger import log_trade
-                send_message("✅ Vyhra zaznamenana!")
-                send_main_menu()
-            elif data == "result_loss":
-                from trade_logger import log_trade
-                record_result("loss")
-                if not paused:
-                    send_main_menu()
 
         elif "message" in update:
             text = update["message"].get("text", "").strip()
@@ -161,8 +160,11 @@ def handle_updates():
                 daily_losses = 0
                 send_message("🔄 Pocitadla manualne resetovana.")
 
+# Globalni pamet poslednich signalu
+last_signals = {}  # { symbol: { "signal": "SHORT", "time": datetime, "conditions": 10 } }
+
 def analyze_and_send(symbol):
-    global daily_trades
+    global daily_trades, last_signals
 
     reset_daily_if_needed()
 
@@ -171,32 +173,63 @@ def analyze_and_send(symbol):
         return
 
     if daily_trades >= config.MAX_TRADES_PER_DAY:
-        send_message(
-            f"⛔ Denni limit {config.MAX_TRADES_PER_DAY} signalu dosazen!\n"
-            f"Zitra se limit resetuje."
-        )
+        send_message(f"⛔ Denni limit dosazen!")
         return
 
     if daily_losses >= config.MAX_DAILY_LOSSES:
-        send_message(
-            f"🛑 Denni limit ztrat {config.MAX_DAILY_LOSSES} dosazen!\n"
-            f"Dnes uz neobchoduj."
-        )
+        send_message(f"🛑 Denni limit ztrat dosazen!")
         return
 
     send_message(f"🔍 Analyzuji <b>{symbol}</b>...")
 
     market_data = get_market_data(symbol)
-
     if market_data is None:
-        send_message(
-            f"❌ <b>{symbol}</b> neni dostupny.\n"
-            f"Zkus jiny symbol."
-        )
+        send_message(f"❌ <b>{symbol}</b> neni dostupny.")
         send_main_menu()
         return
 
     signal, checklist = analyze_symbol(market_data)
+
+    # Zadny signal - pod minimem podminek
+    if signal is None:
+        splneno = checklist.get("splneno", 0)
+        celkem = checklist.get("celkem", 0)
+        send_message(
+            f"⚪ <b>{symbol}</b> — zadny signal\n\n"
+            f"Podmínky: {splneno}/{celkem}\n"
+            f"Trend D1: {checklist.get('trend_daily')}\n"
+            f"Trend 1H: {checklist.get('trend_1h')}\n"
+            f"ATR: {checklist.get('atr_reason')}\n"
+            f"Uroven: {'Nalezena' if checklist.get('level_found') else 'Nenalezena'}"
+        )
+        send_main_menu()
+        return
+
+    # Kontrola duplikatu - stejny signal jako pred max 10 minutami
+    now = datetime.now()
+    last = last_signals.get(symbol)
+    if last:
+        same_signal = last["signal"] == signal
+        same_conditions = last["conditions"] == checklist.get("splneno", 0)
+        time_diff = (now - last["time"]).total_seconds()
+
+        if same_signal and same_conditions and time_diff < 600:
+            send_message(
+                f"⏭️ <b>{symbol}</b> — stejny signal jako pred "
+                f"{int(time_diff/60)} min\n\n"
+                f"Signal: {signal}\n"
+                f"Zmen symbol nebo pockej na nova data."
+            )
+            send_main_menu()
+            return
+
+    # Uloz posledni signal
+    last_signals[symbol] = {
+        "signal": signal,
+        "time": now,
+        "conditions": checklist.get("splneno", 0)
+    }
+
     send_signal(symbol, signal, checklist)
     from trade_logger import log_trade, init_log
     init_log()
