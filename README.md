@@ -1,91 +1,93 @@
 # MyTradingBot
 
-Experimentální Python projekt pro sledování finančních trhů, technickou analýzu a
-zasílání obchodních signálů přes Telegram. Projekt neslouží jako obchodní
-platforma a neprovádí automatické zadávání příkazů u brokera.
+An experimental Python project for monitoring financial markets, performing
+technical analysis, and sending trading signals through Telegram. The project
+is not a trading platform and does not place orders with a broker.
 
-> **DŮLEŽITÝ DISCLAIMER**
+> **IMPORTANT DISCLAIMER**
 >
-> Tento projekt je **experimentální a vzdělávací**. Výstupy algoritmů nejsou
-> investičním doporučením, finanční radou ani zárukou zisku. Kód může obsahovat
-> chyby, neúplné modely a nesprávné předpoklady. Nepoužívejte jej k rozhodování
-> o skutečných penězích ani k live tradingu bez vlastního důkladného auditu,
-> testování a řízení rizik. Autor nenese odpovědnost za jakékoli ztráty nebo
-> škody způsobené použitím tohoto projektu.
+> This project is **experimental and educational**. Algorithm outputs are not
+> investment recommendations, financial advice, or guarantees of profit. The
+> code may contain bugs, incomplete models, and incorrect assumptions. Do not
+> use it to make decisions involving real money or for live trading without
+> thorough independent auditing, testing, and risk management. The author is
+> not responsible for any losses or damages resulting from use of this project.
 
-## Co projekt dělá
+## What the Project Does
 
-Bot běží jako jednoduchá smyčka, která:
+The bot runs as a simple loop that:
 
-1. přijímá příkazy a callbacky z Telegramu,
-2. stáhne tržní data pro vybraný symbol,
-3. připraví data pro časové rámce D1, 1H, 15M a 5M,
-4. vypočítá ATR a další pomocné hodnoty,
-5. vybere jednu ze dvou analytických logik,
-6. vyhodnotí podmínky pro LONG nebo SHORT signál,
-7. odešle výsledek do Telegramu,
-8. uloží signál a jeho pozdější výsledek do `trades.csv`.
+1. receives commands and callbacks from Telegram,
+2. downloads market data for the selected symbol,
+3. prepares data for the D1, 1H, 15M, and 5M timeframes,
+4. calculates ATR and other supporting values,
+5. selects one of two analysis engines,
+6. evaluates conditions for a LONG or SHORT signal,
+7. sends the result to Telegram, and
+8. stores the signal and its later outcome in `trades.csv`.
 
-Projekt pouze generuje a eviduje signály. Neobsahuje napojení na brokera,
-exekuci objednávek, správu účtu ani garanci výsledku.
+The project only generates and records signals. It does not include broker
+connectivity, order execution, account management, or performance guarantees.
 
-## Hlavní funkce
+## Main Features
 
-- **Dva analytické režimy**
-  - `new`: novější logika založená na SMC, likviditě, úrovních a krátkých
-    časových rámcích.
-  - `old`: původní logika s detekcí trendu, úrovní, odrazů, průrazů a
-    checklistů.
-- **Více zdrojů dat**
-  - TwelveData pro forex, komodity a indexy.
-  - Binance API pro podporované kryptoměny bez API klíče.
-- **Více časových rámců**: denní data, 1H, 15M a 5M.
-- **ATR filtry** pro odhad volatility a kontrolu vzdáleností.
-- **Trendové a časové filtry** včetně londýnské a newyorské seance.
-- **Kontrola korelovaných párů**, kanálů, historických úrovní a překážek.
-- **Ochranné limity** na počet denních signálů a denní ztráty.
-- **Cache tržních dat**: při opakované analýze se krátké časové rámce
-  aktualizují rychleji a starší data se znovu nestahují zbytečně.
-- **Telegram menu** pro výběr forexu, kryptoměn, komodit a indexů.
-- **CSV evidence** signálů, modelu, síly signálu, úrovně, stopu, take-profitu,
-  RRR, seance a výsledku.
-- **Prevence duplicitních signálů** pro stejný symbol v krátkém časovém okně.
+- **Two analysis modes**
+  - `new`: newer logic based on SMC, liquidity, levels, and short timeframes.
+  - `old`: original logic with trend, level, bounce, breakout, and checklist
+    detection.
+- **Multiple data sources**
+  - TwelveData for forex, commodities, and indices.
+  - Binance API for supported cryptocurrencies without an API key.
+- **Multiple timeframes**: daily data, 1H, 15M, and 5M.
+- **ATR filters** for volatility estimation and distance checks.
+- **Trend and time filters**, including London and New York sessions.
+- **Correlation checks** for related pairs, channels, historical levels, and
+  obstacles.
+- **Protective limits** on daily signal counts and daily losses.
+- **Market-data cache**: short timeframes are refreshed faster during repeated
+  analysis, while older data is not unnecessarily downloaded again.
+- **Telegram menus** for selecting forex, cryptocurrency, commodity, and index
+  instruments.
+- **CSV records** containing signals, models, signal strength, levels, stops,
+  take-profit values, RRR, sessions, and outcomes.
+- **Duplicate-signal prevention** for the same symbol within a short time
+  window.
 
-## Struktura projektu
+## Project Structure
 
 ```text
 MyTradingBot/
-├── main.py                 # Spuštění bota, Telegram smyčka a limity
-├── config.py               # Konfigurace API, režimu a analytických parametrů
-├── data_fetcher.py         # Stahování, normalizace, ATR a cache dat
-├── analyzer.py             # Původní analytická logika
-├── analyzer_new.py         # Novější SMC/liquidity analytická logika
-├── logic_selector.py       # Výběr aktivní analytické logiky
-├── telegram_notifier.py    # Telegram zprávy, menu a formátování signálů
-├── trade_logger.py         # Zápis signálů a statistik do CSV
-├── trades.csv              # Lokální evidence signálů a výsledků
-├── bot.log                 # Lokální provozní log
-└── README.md               # Dokumentace
+├── main.py                 # Bot entry point, Telegram loop, and limits
+├── config.py               # API, mode, and analysis configuration
+├── data_fetcher.py         # Data download, normalization, ATR, and caching
+├── analyzer.py             # Original analysis engine
+├── analyzer_new.py         # Newer SMC/liquidity analysis engine
+├── logic_selector.py       # Active analysis-engine selection
+├── telegram_notifier.py    # Telegram messages, menus, and signal formatting
+├── trade_logger.py         # Signal and statistics logging to CSV
+├── trades.csv              # Local signal and outcome records
+├── bot.log                 # Local runtime log
+└── README.md               # Project documentation
 ```
 
-## Požadavky
+## Requirements
 
-- Python 3.10 nebo novější
-- Přístup k internetu
-- Telegram bot pro interaktivní ovládání
-- TwelveData API klíč pro forex, komodity a indexy
-- Binance účet není pro veřejná tržní data potřeba
+- Python 3.10 or newer
+- Internet access
+- A Telegram bot for interactive control
+- A TwelveData API key for forex, commodities, and indices
+- No Binance account is required for public market data
 
-Knihovny použité projektem:
+Project dependencies:
 
 ```powershell
 python -m pip install requests pandas numpy
 ```
 
-## Konfigurace
+## Configuration
 
-Údaje nastavte lokálně v [config.py](./config.py). Do Git repozitáře
-neukládejte skutečné tokeny, API klíče ani Telegram ID.
+Set local values in [config.py](./config.py). Never commit real tokens, API
+keys, or Telegram IDs to the Git repository.
 
 ```python
 TWELVEDATA_API_KEY = ""
@@ -98,54 +100,58 @@ SCAN_INTERVAL = 60
 INTERACTIVE_MODE = True
 ```
 
-Nejdůležitější konfigurační oblasti:
+Important configuration groups:
 
-- `MODE`, `ANALYSIS_METHOD` a `SCAN_INTERVAL` řídí provoz botu.
-- `MAX_DAILY_LOSSES` a `MAX_TRADES_PER_DAY` omezují denní aktivitu.
-- `SESSION_*` nastavuje časová okna a jejich zapnutí.
-- `EMA_*`, `ATR_*` a `TREND_LOOKBACK_*` řídí trendové a volatilní filtry.
-- `BOUNCE_*`, `BREAKOUT_*` a `LEVEL_*` řídí detekci odrazů, průrazů a úrovní.
-- `CHECKLIST_*` nastavuje stop-loss, take-profit a minimální RRR.
+- `MODE`, `ANALYSIS_METHOD`, and `SCAN_INTERVAL` control bot operation.
+- `MAX_DAILY_LOSSES` and `MAX_TRADES_PER_DAY` limit daily activity.
+- `SESSION_*` configures trading sessions and enables or disables session
+  filtering.
+- `EMA_*`, `ATR_*`, and `TREND_LOOKBACK_*` control trend and volatility
+  filters.
+- `BOUNCE_*`, `BREAKOUT_*`, and `LEVEL_*` control bounce, breakout, and level
+  detection.
+- `CHECKLIST_*` configures stop-loss, take-profit, and minimum RRR checks.
 
-Hodnota `MODE = "demo"` je doporučená pro vývoj a testování. Ani případná
-hodnota `"real"` sama o sobě nezapíná obchodování u brokera, protože projekt
-žádný broker konektor neobsahuje.
+`MODE = "demo"` is recommended for development and testing. Even setting
+`MODE = "real"` does not enable broker trading because this project contains
+no broker connector.
 
-## Spuštění
+## Running the Bot
 
-Po doplnění konfigurace spusťte:
+After completing the configuration, run:
 
 ```powershell
 python main.py
 ```
 
-Bot následně čeká na Telegram příkazy. Dostupné základní příkazy zahrnují:
+The bot then waits for Telegram commands. Basic commands include:
 
-- `/menu` - zobrazí hlavní menu,
-- `/status` - zobrazí stav botu,
-- `/reset` - resetuje denní počítadla,
-- `/logic_new` - přepne na novější analytickou logiku,
-- `/logic_old` - přepne na původní analytickou logiku.
+- `/menu` - show the main menu,
+- `/status` - show the bot status,
+- `/reset` - reset daily counters,
+- `/logic_new` - switch to the newer analysis engine,
+- `/logic_old` - switch to the original analysis engine.
 
-## Data a limity
+## Data and Limits
 
-Forex, komodity a indexy se načítají přes TwelveData, kde může být aktivní
-rate limit. Krypto symboly se načítají přes veřejné endpointy Binance.
-Při chybě nebo nedostatku dat se signál nevytvoří; podrobnosti se zapisují do
-`bot.log`.
+Forex, commodities, and indices are retrieved through TwelveData, which may
+enforce rate limits. Cryptocurrency symbols are retrieved through Binance's
+public endpoints. If data is unavailable or invalid, no signal is generated;
+details are written to `bot.log`.
 
-`trades.csv` je lokální provozní soubor. Obsahuje historii signálů a může
-obsahovat vlastní poznámky nebo výsledky, proto jej před sdílením zkontrolujte.
-`bot.log` může obsahovat diagnostická data a neměl by se zveřejňovat bez kontroly.
+`trades.csv` is a local runtime file containing signal history and outcomes.
+Review it before sharing because it may contain personal notes or results.
+`bot.log` may contain diagnostic information and should also be reviewed before
+publication.
 
-## Stav projektu
+## Project Status
 
-Projekt je ve fázi experimentování a průběžného vývoje. Analytické modely,
-prahové hodnoty i datové zdroje je nutné validovat na vlastních datech,
-backtestech a paper-tradingu. Nejde o hotový produkční systém.
+The project is under continuous experimentation and development. Analysis
+models, thresholds, and data sources must be validated with independent data,
+backtesting, and paper trading. This is not a finished production system.
 
-## Licence a odpovědnost
+## License and Responsibility
 
-Projekt je poskytován bez záruk. Před použitím si ověřte licenční podmínky
-externích datových služeb a dodržujte jejich limity. Použití kódu je na vlastní
-nebezpečí.
+The project is provided without warranties. Review the licensing terms of
+external data services and follow their usage limits. Use this code at your
+own risk.
