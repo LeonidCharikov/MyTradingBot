@@ -18,25 +18,24 @@ _last_trade_index = None
 
 
 def init_log():
-    """Vytvori CSV soubor pokud neexistuje"""
     if not os.path.exists(LOG_FILE):
         with open(LOG_FILE, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow([
                 "datum", "cas", "symbol", "signal",
                 "model", "sila", "uroven_cena", "uroven_typ",
-                "atr_1h", "podminek_splneno", "podminek_celkem",
-                "session", "vysledek"
+                "atr_1h", "stop", "take", "rrr",
+                "splneno_podminek", "session", "vysledek"
             ])
 
 
-def log_trade(symbol, signal, checklist):
+def log_trade(symbol, signal, checklist, vysledek="?"):
     """Zaznam noveho obchodu do CSV"""
     global _last_trade_index
     init_log()
 
-    mm = checklist.get("market_mode", {})
     session = checklist.get("session_note", "?")
+    cl = checklist.get("checklist_result", {})
 
     row = [
         datetime.now().strftime("%Y-%m-%d"),
@@ -48,17 +47,18 @@ def log_trade(symbol, signal, checklist):
         checklist.get("level_price", "?"),
         checklist.get("level_kind", "?"),
         checklist.get("atr_1h", "?"),
-        checklist.get("splneno", "?"),
-        checklist.get("celkem", "?"),
-        session,
-        "?"   # Vysledek - bude doplnen pozdeji
+        cl.get("stop", "?"),          # stop
+        cl.get("take", "?"),          # take
+        cl.get("rrr", "?"),           # rrr
+        checklist.get("splneno", "?"), # splneno_podminek - cislo
+        session,                       # session
+        vysledek                       # vysledek
     ]
 
     with open(LOG_FILE, "a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(row)
 
-    # Zapamatuj index posledniho radku
     with open(LOG_FILE, "r", encoding="utf-8") as f:
         _last_trade_index = sum(1 for _ in f) - 1
 
@@ -112,17 +112,17 @@ def get_stats():
 
     # Zakladni statistiky
     total = len(rows)
-    wins = sum(1 for r in rows if r.get("vysledek") == "win")
-    losses = sum(1 for r in rows if r.get("vysledek") == "loss")
-    pending = sum(1 for r in rows if r.get("vysledek") == "?")
+    wins = sum(1 for r in rows if r.get("vysledek", "") == "win")
+    losses = sum(1 for r in rows if r.get("vysledek", "") == "loss")
+    pending = sum(1 for r in rows if r.get("vysledek", "") == "?")
     evaluated = wins + losses
     winrate = round(wins / evaluated * 100, 1) if evaluated > 0 else 0
 
     # Statistiky podle modelu
     models = {}
     for r in rows:
-        model = r.get("model", "?")
-        v = r.get("vysledek", "?")
+        model = r.get("model") or "?"
+        v = r.get("vysledek") or "?"
         if model not in models:
             models[model] = {"win": 0, "loss": 0}
         if v == "win":
@@ -130,29 +130,29 @@ def get_stats():
         elif v == "loss":
             models[model]["loss"] += 1
 
-    # Statistiky podle symbolu
-    symbols = {}
-    for r in rows:
-        sym = r.get("symbol", "?")
-        v = r.get("vysledek", "?")
-        if sym not in symbols:
-            symbols[sym] = {"win": 0, "loss": 0}
-        if v == "win":
-            symbols[sym]["win"] += 1
-        elif v == "loss":
-            symbols[sym]["loss"] += 1
-
     # Statistiky podle sily signalu
     strengths = {}
     for r in rows:
-        sila = r.get("sila", "?")
-        v = r.get("vysledek", "?")
+        sila = r.get("sila") or "?"
+        v = r.get("vysledek") or "?"
         if sila not in strengths:
             strengths[sila] = {"win": 0, "loss": 0}
         if v == "win":
             strengths[sila]["win"] += 1
         elif v == "loss":
             strengths[sila]["loss"] += 1
+
+    # Statistiky podle symbolu
+    symbols = {}
+    for r in rows:
+        sym = r.get("symbol") or "?"
+        v = r.get("vysledek") or "?"
+        if sym not in symbols:
+            symbols[sym] = {"win": 0, "loss": 0}
+        if v == "win":
+            symbols[sym]["win"] += 1
+        elif v == "loss":
+            symbols[sym]["loss"] += 1
 
     # Sestaveni zpravy
     text = (
@@ -163,29 +163,29 @@ def get_stats():
 
     # Podle modelu
     text += "<b>Podle modelu:</b>\n"
-    for model, data in sorted(models.items()):
+    for model, data in sorted(models.items(), key=lambda x: x[0] or ""):
         t = data["win"] + data["loss"]
         if t == 0:
             continue
         wr = round(data["win"] / t * 100, 1)
         bar = "█" * int(wr / 10) + "░" * (10 - int(wr / 10))
-        text += f"{model}: {bar} {wr}% ({t} obchodu)\n"
+        text += f"{model}: {bar} {wr}% ({t}x)\n"
 
     # Podle sily
     text += "\n<b>Podle sily signalu:</b>\n"
-    strength_order = ["SILNY", "STREDNI", "SLABY", "VELMI SLABY"]
+    strength_order = ["SILNY", "STREDNI", "SLABY", "VELMI SLABY", "?"]
     for sila in strength_order:
         data = strengths.get(sila, {"win": 0, "loss": 0})
         t = data["win"] + data["loss"]
         if t == 0:
             continue
         wr = round(data["win"] / t * 100, 1)
-        text += f"{sila}: {wr}% ({t} obchodu)\n"
+        text += f"{sila}: {wr}% ({t}x)\n"
 
-    # Podle symbolu - jen top 5
+    # Podle symbolu - top 5
     text += "\n<b>Top symboly:</b>\n"
     sym_sorted = sorted(
-        symbols.items(),
+        [(s, d) for s, d in symbols.items()],
         key=lambda x: x[1]["win"] + x[1]["loss"],
         reverse=True
     )[:5]
@@ -194,6 +194,6 @@ def get_stats():
         if t == 0:
             continue
         wr = round(data["win"] / t * 100, 1)
-        text += f"{sym}: {wr}% ({t} obchodu)\n"
+        text += f"{sym}: {wr}% ({t}x)\n"
 
     return text

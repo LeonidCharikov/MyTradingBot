@@ -767,7 +767,6 @@ def find_best_level(df_1h, df_daily, atr_1h, atr_daily):
     if lt:
         return lt, lp, ltype, count_level_strength(lt, lp, df_1h, atr_1h)
 
-    return None, None, None, 0
 
 # ============================================================
 # PREDPOKLADY PRO ODBOJ
@@ -1927,6 +1926,27 @@ def analyze_symbol(market_data):
     # --- 2. ATR filtry ---
     atr_ok, atr_reason = check_atr_filters(df_daily, atr_daily)
 
+    if not atr_ok:
+        return None, {
+            "symbol":       symbol,
+            "note":         f"ATR filtr: {atr_reason}",
+            "trend_daily":  trend_daily,
+            "trend_1h":     trend_1h,
+            "atr_reason":   atr_reason,
+            "level_found":  False,
+            "level_kind":   None,
+            "level_price":  None,
+            "session_note": session_note,
+            "splneno":      0,
+            "celkem":       10,
+            "signal_strength": "ZADNY",
+            "model":        "ZADNY",
+            "entry_time":   datetime.now().strftime("%H:%M"),
+            "minutes_ahead": 3,
+            "signal_generated_at": datetime.now().strftime("%H:%M:%S"),
+            "source":       market_data.get("source", "twelvedata"),
+        }
+
     # --- 3. Rezim trhu ---
     market_mode = detect_market_mode(df_1h, df_daily, atr_1h)
 
@@ -1934,6 +1954,8 @@ def analyze_symbol(market_data):
     level_type, level_price, level_kind, level_strength = find_best_level(
         df_1h, df_daily, atr_1h, atr_daily
     )
+
+    print(f"DEBUG: level_type={level_type}, level_price={level_price}, kind={level_kind}")
 
     # --- 5. Predpoklady ---
     bounce_score, bounce_details = check_bounce_prerequisites(
@@ -1956,22 +1978,28 @@ def analyze_symbol(market_data):
         df_1h, df_daily, atr_daily
     )
 
-    # --- 6. Obchodni model ---
+        # --- 6. Obchodni model ---
+    
+    # Ujistime se ze mame vsechny promenne definovane
+    if level_type is None:
+        level_price = 0
+        level_kind = "NONE"
+        level_strength = 0
+    
+    # Vzdalenost od urovne pro fallback
+    last_close = df_1h["close"].iloc[-1]
+    distance_from_level = abs(last_close - level_price) if level_price and level_price > 0 else float('inf')
+    near_level = distance_from_level < atr_1h * 0.5  # Do 0.5 ATR
+    
     lp_ok, lp_direction, lp_type = check_all_false_breakouts(
         df_1h, level_type, level_price, atr_1h
     )
-    bounce_ok, _ = check_bounce_model(
+    bounce_ok, bounce_reason = check_bounce_model(
         df_1h, level_type or "RESISTANCE", level_price or 0, atr_1h
     )
-    breakout_ok, _ = check_breakout_model(
+    breakout_ok, breakout_reason = check_breakout_model(
         df_1h, level_type or "RESISTANCE", level_price or 0, atr_1h, trend_daily
     )
-
-    # LP uroven existuje ale formace neni potvrzena
-    # level_kind = typ urovne (LP, MIRROR, atd.)
-    # lp_ok = zda je LP formace dokoncena (proboj + navrat)
-    lp_level_exists = level_kind == "LP"
-    lp_formation_confirmed = lp_ok
 
     # Signal podle priority
     if lp_ok and lp_direction:
@@ -1983,18 +2011,29 @@ def analyze_symbol(market_data):
     elif breakout_ok:
         signal = "LONG" if level_type == "RESISTANCE" else "SHORT"
         model_name = "PROBOJ"
-    elif momentum_signal:                    # NOVY
+    elif momentum_signal:
         signal = momentum_signal
         model_name = "MOMENTUM"
-    elif trend_daily != "NEUTRAL":
-        signal = "SHORT" if trend_daily == "DOWN" else "LONG"
-        model_name = "TREND"
-    elif market_mode["corridor_signal"] != "NEUTRAL":
-        signal = market_mode["corridor_signal"]
-        model_name = "REJNZ"
     else:
-        signal = "SHORT" if trend_1h == "DOWN" else "LONG"
-        model_name = "SLABY"
+        return None, {
+            "symbol":       symbol,
+            "note":         "Zadny model nenalezen",
+            "trend_daily":  trend_daily,
+            "trend_1h":     trend_1h,
+            "atr_reason":   atr_reason,
+            "level_found":  level_type is not None,
+            "level_kind":   level_kind,
+            "level_price":  level_price,
+            "session_note": session_note,
+            "splneno":      0,
+            "celkem":       10,
+            "signal_strength": "ZADNY",
+            "model":        "ZADNY",
+            "entry_time":   datetime.now().strftime("%H:%M"),
+            "minutes_ahead": 3,
+            "signal_generated_at": datetime.now().strftime("%H:%M:%S"),
+            "source":       market_data.get("source", "twelvedata"),
+        }
 
     # --- 6b. Rozsirene kontroly ---
 
@@ -2106,24 +2145,17 @@ def analyze_symbol(market_data):
 
     # --- Podmínky a sila signalu ---
     conditions = {
-        "trend_d1":       trend_daily != "NEUTRAL",
-        "trend_1h":       trend_1h != "NEUTRAL",
-        "trends_aligned": trends_aligned,
-        "atr_ok":         atr_ok,
-        "uroven":         level_type is not None,
-        "sila_urovne":    (level_strength or 0) >= 2,
-        "predpoklady":    pre_score >= 4,
-        "model_ok":       model_name not in ["TREND", "REJNZ", "SLABY"],
-        "checklist_ok":   checklist_result.get("score", 0) >= 4,
-        "mtf_ok":         mtf_confirmation,
-        "zaderg_ok":      zaderg_ok,
-        "cancel_ok":      not cancel_order,
-        "session_ok":     session_ok,
-        "podjati_ok":     podjati_status != "PODJATI",  
-        "impulse_ok":     impulse_ok,                   
-        "d1_at_level":    d1_at_level,                  
-        "lp_5m_ok":       lp_5m_score >= 3,
-        "momentum_ok": momentum_score >= 5             
+        "trend_d1":     trend_daily != "NEUTRAL",
+        "trend_1h":     trend_1h != "NEUTRAL",
+        "atr_ok":       atr_ok,
+        "uroven":       level_type is not None,
+        "sila_urovne":  (level_strength or 0) >= 2,
+        "mtf_ok":       mtf_confirmation,
+        "bpu2_ok":      bpu2_closed,
+        "session_ok":   session_ok,
+        "cancel_ok":    not cancel_order,
+        "podjati_ok":   podjati_status != "PODJATI",
+        "blizko_urovne": near_level if 'near_level' in locals() else False,
     }
 
     splneno = sum(conditions.values())
@@ -2148,7 +2180,9 @@ def analyze_symbol(market_data):
             signal_strength = "STREDNI"
 
     # Podjati = sniz silu (ale ne u LP modelu)
-    if podjati_status == "PODJATI" and model_name not in ["LP 1 BAR", "LP 2 BARY", "LP SLOZITY"]:
+    if podjati_status == "PODJATI" and model_name not in [
+        "LP 1 BAR", "LP 2 BARY", "LP SLOZITY"
+    ]:
         if signal_strength in ["SILNY", "STREDNI"]:
             signal_strength = "SLABY"
 
@@ -2184,10 +2218,6 @@ def analyze_symbol(market_data):
         "market_mode":      market_mode,
         # Checklist
         "checklist_result": checklist_result,
-        # Podmínky
-        "conditions":       conditions,
-        "splneno":          splneno,
-        "celkem":           celkem,
         # Cas
         "entry_time":       entry_time.strftime("%H:%M"),
         "minutes_ahead":    minutes_ahead,

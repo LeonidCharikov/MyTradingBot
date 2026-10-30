@@ -2,7 +2,8 @@ import time
 import config
 import requests
 from data_fetcher import get_market_data
-from analyzer import analyze_symbol
+from analyzer import analyze_symbol as analyze_old
+from analyzer_new import analyze_new_logic as analyze_new 
 from telegram_notifier import (
     send_message, send_main_menu, send_forex_menu,
     send_indices_menu, send_commodities_menu, send_crypto_menu,
@@ -72,6 +73,89 @@ def record_result(result):
                 f"Zbyvajicich ztrat: {remaining}"
             )
 
+
+def scan_best_pairs(pairs):
+    """
+    Projde seznam paru a vrati nejlepsi signaly serazene podle sily.
+    """
+    send_message(f"🔍 Skenuji {len(pairs)} paru... chvili strpeni")
+    
+    results = []
+    
+    for symbol in pairs:
+        try:
+            market_data = get_market_data(symbol)
+            if market_data is None:
+                continue
+            
+            signal, checklist = analyze_symbol(market_data)
+            
+            if signal is not None:
+                results.append({
+                    "symbol": symbol,
+                    "signal": signal,
+                    "model": checklist.get("model", "?"),
+                    "strength": checklist.get("signal_strength", "?"),
+                    "splneno": checklist.get("splneno", 0),
+                    "celkem": checklist.get("celkem", 10),
+                    "entry_time": checklist.get("entry_time", "?"),
+                    "checklist": checklist
+                })
+        except Exception as e:
+            logger.warning(f"Chyba skenu {symbol}: {e}")
+            continue
+    
+    if not results:
+        send_message(
+            "⚪ Zadny signal nenalezen\n\n"
+            "Zkus pozdeji nebo jiny seznam paru."
+        )
+        send_main_menu()
+        return
+    
+    # Serad podle sily
+    strength_order = {"SILNY": 4, "STREDNI": 3, "SLABY": 2, "VELMI SLABY": 1}
+    results.sort(
+        key=lambda x: (
+            strength_order.get(x["strength"], 0),
+            x["splneno"]
+        ),
+        reverse=True
+    )
+    
+    # Zobraz top 5
+    top = results[:5]
+    
+    message = f"📊 <b>Top signaly ({len(results)}/{len(pairs)} paru)</b>\n\n"
+    
+    for i, r in enumerate(top, 1):
+        emoji = "📉" if r["signal"] == "SHORT" else "📈"
+        strength_emoji = {
+            "SILNY": "💪", "STREDNI": "👍",
+            "SLABY": "⚠️", "VELMI SLABY": "🔴"
+        }.get(r["strength"], "➖")
+        
+        message += (
+            f"{i}. {emoji} <b>{r['symbol']} — {r['signal']}</b>\n"
+            f"   {strength_emoji} {r['strength']} | {r['model']} | "
+            f"{r['splneno']}/{r['celkem']} | ⏰ {r['entry_time']}\n\n"
+        )
+    
+    # Tlacitka pro top 3
+    keyboard = {
+        "inline_keyboard": [
+            [
+                {"text": f"▶️ {r['symbol']} {r['signal']}",
+                 "callback_data": f"analyze_{r['symbol']}"}
+            ]
+            for r in top[:3]
+        ] + [[{"text": "🏠 Menu", "callback_data": "back_main"}]]
+    }
+    
+    send_message(message, keyboard)
+
+
+
 def handle_updates():
     global daily_trades, paused
 
@@ -119,6 +203,21 @@ def handle_updates():
                 update_last_result("win")
                 send_message("✅ Vyhra zaznamenana!")
                 send_main_menu()
+            
+            elif data == "scan_forex":
+                forex_pairs = [
+                    "EUR/USD", "GBP/USD", "USD/JPY",
+                    "EUR/JPY", "AUD/JPY", "USD/CHF",
+                    "EUR/GBP", "CAD/JPY", "AUD/NZD"
+                ]
+                scan_best_pairs(forex_pairs)
+
+            elif data == "scan_crypto":
+                crypto_pairs = [
+                    "BTC/USD", "ETH/USD", "BNB/USD",
+                    "SOL/USD", "XRP/USD"
+                ]
+                scan_best_pairs(crypto_pairs)
 
             elif data == "result_loss":
                 from trade_logger import update_last_result
@@ -159,51 +258,55 @@ def handle_updates():
                 daily_trades = 0
                 daily_losses = 0
                 send_message("🔄 Pocitadla manualne resetovana.")
+            elif text == "/logic_new":
+                config.ANALYSIS_METHOD = "new"
+                send_message("✅ Nastavena <b>NOVÁ</b> logika (SMC/Liquidity)")
+            elif text == "/logic_old":
+                config.ANALYSIS_METHOD = "old"
+                send_message("✅ Nastavena <b>STARÁ</b> logika (BPU/PDF modely)")
+            
 
 # Globalni pamet poslednich signalu
 last_signals = {}  # { symbol: { "signal": "SHORT", "time": datetime, "conditions": 10 } }
 
 def analyze_and_send(symbol):
     global daily_trades, last_signals
-
     reset_daily_if_needed()
 
-    if paused:
-        send_message("⏸️ Bot je na pauze. /start pro obnoveni.")
-        return
-
-    if daily_trades >= config.MAX_TRADES_PER_DAY:
-        send_message(f"⛔ Denni limit dosazen!")
-        return
-
-    if daily_losses >= config.MAX_DAILY_LOSSES:
-        send_message(f"🛑 Denni limit ztrat dosazen!")
+    if paused or daily_trades >= config.MAX_TRADES_PER_DAY or daily_losses >= config.MAX_DAILY_LOSSES:
+        send_message("⏸️ Bot je zastaven nebo dosáhl limitů.")
         return
 
     send_message(f"🔍 Analyzuji <b>{symbol}</b>...")
-
     market_data = get_market_data(symbol)
-    if market_data is None:
-        send_message(f"❌ <b>{symbol}</b> neni dostupny.")
-        send_main_menu()
-        return
+    if market_data is None: return
 
-    signal, checklist = analyze_symbol(market_data)
+    # --- OPRAVENÁ ČÁST: Voláme jen jednu funkci přes selector ---
+    from logic_selector import get_signal
+    signal, checklist = get_signal(market_data, logic_type=config.ANALYSIS_METHOD)
+    # -----------------------------------------------------------
 
-    # Zadny signal - pod minimem podminek
     if signal is None:
-        splneno = checklist.get("splneno", 0)
-        celkem = checklist.get("celkem", 0)
+        # Získání dat pro zprávu (pokud chybí, dáme '?' nebo 'OK')
+        note = checklist.get('note', 'Neznámý důvod')
+        atr_reason = checklist.get('atr_reason', 'OK')
+        session_note = checklist.get('session_note', 'Probíhá')
+        
+        # Oprava: Pokud nová logika nenašla signál, ale víme, že úrovně existují
+        level_found = checklist.get('level_found', False)
+        duvod = f"⚪ {note}" if level_found else "📍 Zadna uroven nenalezena"
+
         send_message(
             f"⚪ <b>{symbol}</b> — zadny signal\n\n"
-            f"Podmínky: {splneno}/{celkem}\n"
-            f"Trend D1: {checklist.get('trend_daily')}\n"
-            f"Trend 1H: {checklist.get('trend_1h')}\n"
-            f"ATR: {checklist.get('atr_reason')}\n"
-            f"Uroven: {'Nalezena' if checklist.get('level_found') else 'Nenalezena'}"
+            f"{duvod}\n\n"
+            f"D1: {checklist.get('trend_daily', '?')} | "
+            f"1H: {checklist.get('trend_1h', '?')} | "
+            f"ATR: {atr_reason}\n"
+            f"Session: {session_note}"
         )
         send_main_menu()
         return
+
 
     # Kontrola duplikatu - stejny signal jako pred max 10 minutami
     now = datetime.now()
@@ -214,13 +317,37 @@ def analyze_and_send(symbol):
         time_diff = (now - last["time"]).total_seconds()
 
         if same_signal and same_conditions and time_diff < 600:
+            keyboard = {
+                "inline_keyboard": [
+                    [
+                        {"text": f"🔄 Znovu {symbol}", "callback_data": f"analyze_{symbol}"},
+                        {"text": "🏠 Menu", "callback_data": "back_main"}
+                    ],
+                    [
+                        {"text": "✅ Vyhral jsem", "callback_data": "result_win"},
+                        {"text": "❌ Prohrál jsem", "callback_data": "result_loss"}
+                    ]
+                ]
+            }
+            from analyzer import calculate_best_entry
+            entry_time, minutes_ahead = calculate_best_entry(datetime.now())
+
             send_message(
-                f"⏭️ <b>{symbol}</b> — stejny signal jako pred "
-                f"{int(time_diff/60)} min\n\n"
-                f"Signal: {signal}\n"
-                f"Zmen symbol nebo pockej na nova data."
+                f"{'📉' if signal == 'SHORT' else '📈'} "
+                f"<b>{symbol} — {signal}</b>\n"
+                f"⏰ Zavre se v <b>{entry_time.strftime('%H:%M')}</b> "
+                f"({minutes_ahead} min)\n\n"
+                f"♻️ Stejny signal jako pred {int(time_diff/60)} min\n"
+                f"Podmínky nezmeneny — vstup na vlastni riziko.",
+                keyboard
             )
-            send_main_menu()
+
+            # Zapis i duplikatni signal do CSV
+            from trade_logger import log_trade, init_log
+            init_log()
+            log_trade(symbol, signal, checklist)
+            daily_trades += 1
+
             return
 
     # Uloz posledni signal

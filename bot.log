@@ -1,0 +1,363 @@
+2026-04-06 08:05:22,362 [INFO] Bot startuje
+2026-04-06 08:05:40,694 [INFO] TwelveData: AUD/NZD 1day (20 svicek)
+2026-04-06 08:05:49,184 [INFO] TwelveData: AUD/NZD 1h (50 svicek)
+2026-04-06 08:05:57,624 [INFO] TwelveData: AUD/NZD 15min (50 svicek)
+2026-04-06 08:06:06,042 [INFO] TwelveData: AUD/NZD 5min (30 svicek)
+2026-04-06 08:09:03,543 [INFO] Ztrata #1/7
+2026-04-06 08:09:33,760 [INFO] TwelveData: EUR/USD 1day (20 svicek)
+2026-04-06 08:09:42,217 [INFO] TwelveData: EUR/USD 1h (50 svicek)
+2026-04-06 08:09:50,681 [INFO] TwelveData: EUR/USD 15min (50 svicek)
+2026-04-06 08:09:59,129 [INFO] TwelveData: EUR/USD 5min (30 svicek)
+2026-04-06 08:13:04,844 [INFO] Ztrata #2/7
+2026-04-06 08:13:12,244 [INFO] Cache hit EUR/USD (vek: 185s) - rychla aktualizace
+2026-04-06 08:13:12,244 [INFO] Rychla aktualizace: EUR/USD
+2026-04-06 08:13:12,770 [INFO] TwelveData: EUR/USD 15min (20 svicek)
+2026-04-06 08:13:21,237 [INFO] TwelveData: EUR/USD 5min (20 svicek)
+2026-04-06 08:16:10,730 [INFO] Cache hit EUR/USD (vek: 169s) - rychla aktualizace
+2026-04-06 08:16:10,731 [INFO] Rychla aktualizace: EUR/USD
+2026-04-06 08:16:11,185 [INFO] TwelveData: EUR/USD 15min (20 svicek)
+2026-04-06 08:16:19,693 [INFO] TwelveData: EUR/USD 5min (20 svicek)
+2026-04-06 08:17:17,215 [INFO] Cache hit EUR/USD (vek: 57s) - rychla aktualizace
+2026-04-06 08:17:17,215 [INFO] Rychla aktualizace: EUR/USD
+2026-04-06 08:17:17,663 [INFO] TwelveData: EUR/USD 15min (20 svicek)
+2026-04-06 08:17:26,145 [INFO] TwelveData: EUR/USD 5min (20 svicek)
+2026-04-06 08:20:16,822 [INFO] Bot zastaven
+2026-04-06 08:20:19,720 [INFO] Bot startuje
+2026-04-06 08:20:27,067 [INFO] TwelveData: EUR/USD 1day (20 svicek)
+2026-04-06 08:20:35,594 [INFO] TwelveData: EUR/USD 1h (50 svicek)
+2026-04-06 08:20:44,034 [INFO] TwelveData: EUR/USD 15min (50 svicek)
+2026-04-06 08:20:52,504 [INFO] TwelveData: EUR/USD 5min (30 svicek)
+2026-04-06 08:21:00,519 [ERROR] Neocekavana chyba: cannot access local variable 'datetime' where it is not associated with a value
+2026-04-06 08:23:31,491 [INFO] Bot zastaven
+2026-04-06 08:23:34,298 [INFO] Bot startuje
+2026-04-06 08:23:41,677 [INFO] TwelveData: EUR/USD 1day (20 svicek)
+2026-04-06 08:23:50,121 [INFO] TwelveData: EUR/USD 1h (50 svicek)
+2026-04-06 08:23:58,585 [INFO] TwelveData: EUR/USD 15min (50 svicek)
+2026-04-06 08:24:07,049 [INFO] TwelveData: EUR/USD 5min (30 svicek)
+2026-04-06 08:27:10,813 [INFO] Cache hit EUR/USD (vek: 175s) - rychla aktualizace
+2026-04-06 08:27:10,813 [INFO] Rychla aktualizace: EUR/USD
+2026-04-06 08:27:11,276 [INFO] TwelveData: EUR/USD 15min (20 svicek)
+2026-04-06 08:27:19,823 [INFO] TwelveData: EUR/USD 5min (20 svicek)
+2026-04-06 08:30:11,222 [INFO] Cache hit EUR/USD (vek: 171s) - rychla aktualizace
+2026-04-06 08:30:11,222 [INFO] Rychla aktualizace: EUR/USD
+2026-04-06 08:30:11,640 [INFO] TwelveData: EUR/USD 15min (20 svicek)
+2026-04-06 08:30:20,087 [INFO] TwelveData: EUR/USD 5min (20 svicek)
+2026-04-06 08:33:04,016 [INFO] Ztrata #1/7
+2026-04-06 08:33:12,031 [INFO] Cache hit EUR/USD (vek: 171s) - rychla aktualizace
+2026-04-06 08:33:12,031 [INFO] Rychla aktualizace: EUR/USD
+2026-04-06 08:33:12,479 [INFO] TwelveData: EUR/USD 15min (20 svicek)
+2026-04-06 08:33:20,977 [INFO] TwelveData: EUR/USD 5min (20 svicek)
+2026-04-06 08:36:14,534 [INFO] Cache hit EUR/USD (vek: 173s) - rychla aktualizace
+2026-04-06 08:36:14,534 [INFO] Rychla aktualizace: EUR/USD
+2026-04-06 08:36:14,960 [INFO] TwelveData: EUR/USD 15min (20 svicek)
+2026-04-06 08:36:23,410 [INFO] TwelveData: EUR/USD 5min (20 svicek)
+2026-04-06 08:39:03,577 [INFO] Ztrata #2/7
+2026-04-06 08:39:11,964 [INFO] Cache hit EUR/USD (vek: 168s) - rychla aktualizace
+2026-04-06 08:39:11,964 [INFO] Rychla aktualizace: EUR/USD
+2026-04-06 08:39:12,436 [INFO] TwelveData: EUR/USD 15min (20 svicek)
+2026-04-06 08:39:20,867 [INFO] TwelveData: EUR/USD 5min (20 svicek)
+2026-04-06 08:42:07,456 [INFO] Ztrata #3/7
+2026-04-06 08:42:15,744 [INFO] TwelveData: AUD/JPY 1day (20 svicek)
+2026-04-06 08:42:24,202 [INFO] TwelveData: AUD/JPY 1h (50 svicek)
+2026-04-06 08:42:32,648 [INFO] TwelveData: AUD/JPY 15min (50 svicek)
+2026-04-06 08:42:41,080 [INFO] TwelveData: AUD/JPY 5min (30 svicek)
+2026-04-06 08:46:09,036 [INFO] Cache hit AUD/JPY (vek: 199s) - rychla aktualizace
+2026-04-06 08:46:09,037 [INFO] Rychla aktualizace: AUD/JPY
+2026-04-06 08:46:09,533 [INFO] TwelveData: AUD/JPY 15min (20 svicek)
+2026-04-06 08:46:17,969 [INFO] TwelveData: AUD/JPY 5min (20 svicek)
+2026-04-06 08:49:46,878 [INFO] TwelveData: USD/CHF 1day (20 svicek)
+2026-04-06 08:49:55,316 [INFO] TwelveData: USD/CHF 1h (50 svicek)
+2026-04-06 08:50:03,905 [INFO] TwelveData: USD/CHF 15min (50 svicek)
+2026-04-06 08:50:12,397 [INFO] TwelveData: USD/CHF 5min (30 svicek)
+2026-04-06 08:53:25,585 [INFO] Cache hit USD/CHF (vek: 185s) - rychla aktualizace
+2026-04-06 08:53:25,585 [INFO] Rychla aktualizace: USD/CHF
+2026-04-06 08:53:26,129 [INFO] TwelveData: USD/CHF 15min (20 svicek)
+2026-04-06 08:53:34,644 [INFO] TwelveData: USD/CHF 5min (20 svicek)
+2026-04-06 08:56:04,533 [INFO] Ztrata #4/7
+2026-04-06 08:56:14,514 [INFO] Cache hit USD/CHF (vek: 159s) - rychla aktualizace
+2026-04-06 08:56:14,514 [INFO] Rychla aktualizace: USD/CHF
+2026-04-06 08:56:14,948 [INFO] TwelveData: USD/CHF 15min (20 svicek)
+2026-04-06 08:56:23,366 [INFO] TwelveData: USD/CHF 5min (20 svicek)
+2026-04-06 09:15:12,292 [INFO] TwelveData: AUD/NZD 1day (20 svicek)
+2026-04-06 09:15:21,590 [INFO] TwelveData: AUD/NZD 1h (50 svicek)
+2026-04-06 09:15:31,437 [INFO] TwelveData: AUD/NZD 15min (50 svicek)
+2026-04-06 09:15:39,913 [INFO] TwelveData: AUD/NZD 5min (30 svicek)
+2026-04-06 09:18:57,482 [INFO] Ztrata #5/7
+2026-04-06 09:19:12,769 [INFO] Bot zastaven
+2026-04-06 09:19:46,988 [INFO] Bot startuje
+2026-04-06 09:20:00,194 [INFO] TwelveData: AUD/NZD 1day (20 svicek)
+2026-04-06 09:20:08,650 [INFO] TwelveData: AUD/NZD 1h (50 svicek)
+2026-04-06 09:20:17,206 [INFO] TwelveData: AUD/NZD 15min (50 svicek)
+2026-04-06 09:20:25,634 [INFO] TwelveData: AUD/NZD 5min (30 svicek)
+2026-04-06 09:23:53,007 [INFO] Cache hit AUD/NZD (vek: 199s) - rychla aktualizace
+2026-04-06 09:23:53,007 [INFO] Rychla aktualizace: AUD/NZD
+2026-04-06 09:23:53,418 [INFO] TwelveData: AUD/NZD 15min (20 svicek)
+2026-04-06 09:24:01,861 [INFO] TwelveData: AUD/NZD 5min (20 svicek)
+2026-04-06 09:27:10,975 [INFO] Ztrata #1/7
+2026-04-06 09:27:28,252 [INFO] TwelveData: GBP/USD 1day (20 svicek)
+2026-04-06 09:27:37,351 [INFO] TwelveData: GBP/USD 1h (50 svicek)
+2026-04-06 09:27:45,781 [INFO] TwelveData: GBP/USD 15min (50 svicek)
+2026-04-06 09:27:54,224 [INFO] TwelveData: GBP/USD 5min (30 svicek)
+2026-04-06 09:29:10,841 [INFO] Cache hit GBP/USD (vek: 68s) - rychla aktualizace
+2026-04-06 09:29:10,841 [INFO] Rychla aktualizace: GBP/USD
+2026-04-06 09:29:11,295 [INFO] TwelveData: GBP/USD 15min (20 svicek)
+2026-04-06 09:29:19,741 [INFO] TwelveData: GBP/USD 5min (20 svicek)
+2026-04-06 09:30:43,663 [INFO] Ztrata #2/7
+2026-04-06 09:31:50,234 [INFO] Ztrata #3/7
+2026-04-06 09:32:46,553 [INFO] TwelveData: EUR/USD 1day (20 svicek)
+2026-04-06 09:32:54,987 [INFO] TwelveData: EUR/USD 1h (50 svicek)
+2026-04-06 09:33:03,435 [INFO] TwelveData: EUR/USD 15min (50 svicek)
+2026-04-06 09:33:11,905 [INFO] TwelveData: EUR/USD 5min (30 svicek)
+2026-04-06 09:36:04,438 [INFO] Ztrata #4/7
+2026-04-06 09:36:17,031 [INFO] TwelveData: AUD/JPY 1day (20 svicek)
+2026-04-06 09:36:25,509 [INFO] TwelveData: AUD/JPY 1h (50 svicek)
+2026-04-06 09:36:34,011 [INFO] TwelveData: AUD/JPY 15min (50 svicek)
+2026-04-06 09:36:42,492 [INFO] TwelveData: AUD/JPY 5min (30 svicek)
+2026-04-06 09:40:04,881 [INFO] Ztrata #5/7
+2026-04-06 09:40:16,441 [INFO] Cache hit AUD/JPY (vek: 205s) - rychla aktualizace
+2026-04-06 09:40:16,441 [INFO] Rychla aktualizace: AUD/JPY
+2026-04-06 09:40:16,933 [INFO] TwelveData: AUD/JPY 15min (20 svicek)
+2026-04-06 09:40:25,402 [INFO] TwelveData: AUD/JPY 5min (20 svicek)
+2026-04-06 09:43:26,368 [INFO] Cache hit AUD/JPY (vek: 180s) - rychla aktualizace
+2026-04-06 09:43:26,368 [INFO] Rychla aktualizace: AUD/JPY
+2026-04-06 09:43:26,863 [INFO] TwelveData: AUD/JPY 15min (20 svicek)
+2026-04-06 09:43:35,356 [INFO] TwelveData: AUD/JPY 5min (20 svicek)
+2026-04-06 09:47:40,259 [INFO] Cache hit AUD/JPY (vek: 244s) - rychla aktualizace
+2026-04-06 09:47:40,259 [INFO] Rychla aktualizace: AUD/JPY
+2026-04-06 09:47:41,680 [INFO] TwelveData: AUD/JPY 15min (20 svicek)
+2026-04-06 09:47:50,361 [INFO] TwelveData: AUD/JPY 5min (20 svicek)
+2026-04-06 09:53:44,313 [INFO] Cache expirovala pro AUD/JPY - stahuji vse
+2026-04-06 09:53:44,833 [INFO] TwelveData: AUD/JPY 1day (20 svicek)
+2026-04-06 09:53:53,361 [INFO] TwelveData: AUD/JPY 1h (50 svicek)
+2026-04-06 09:54:01,984 [INFO] TwelveData: AUD/JPY 15min (50 svicek)
+2026-04-06 09:54:10,630 [INFO] TwelveData: AUD/JPY 5min (30 svicek)
+2026-04-06 09:58:36,825 [INFO] Cache hit AUD/JPY (vek: 258s) - rychla aktualizace
+2026-04-06 09:58:36,825 [INFO] Rychla aktualizace: AUD/JPY
+2026-04-06 09:58:37,284 [INFO] TwelveData: AUD/JPY 15min (20 svicek)
+2026-04-06 09:58:45,795 [INFO] TwelveData: AUD/JPY 5min (20 svicek)
+2026-04-06 10:03:20,510 [INFO] TwelveData: EUR/CAD 1day (20 svicek)
+2026-04-06 10:03:28,973 [INFO] TwelveData: EUR/CAD 1h (50 svicek)
+2026-04-06 10:03:39,114 [INFO] TwelveData: EUR/CAD 15min (50 svicek)
+2026-04-06 10:03:49,040 [INFO] TwelveData: EUR/CAD 5min (30 svicek)
+2026-04-06 10:07:02,703 [INFO] Ztrata #6/7
+2026-04-06 10:07:17,442 [INFO] TwelveData: EUR/GBP 1day (20 svicek)
+2026-04-06 10:07:25,876 [INFO] TwelveData: EUR/GBP 1h (50 svicek)
+2026-04-06 10:07:34,334 [INFO] TwelveData: EUR/GBP 15min (50 svicek)
+2026-04-06 10:07:42,764 [INFO] TwelveData: EUR/GBP 5min (30 svicek)
+2026-04-06 10:12:09,928 [INFO] Bot zastaven
+2026-04-06 13:49:32,879 [INFO] Bot startuje
+2026-04-06 13:49:37,402 [ERROR] Neocekavana chyba: cannot access local variable 'daily_losses' where it is not associated with a value
+2026-04-06 13:49:43,342 [ERROR] Neocekavana chyba: '<' not supported between instances of 'NoneType' and 'str'
+2026-04-06 13:49:59,618 [ERROR] Neocekavana chyba: '<' not supported between instances of 'NoneType' and 'str'
+2026-04-06 13:51:31,881 [INFO] Bot zastaven
+2026-04-06 13:51:37,081 [INFO] Bot startuje
+2026-04-06 13:57:50,334 [INFO] Bot zastaven
+2026-04-06 13:57:51,955 [INFO] Bot startuje
+2026-04-06 13:58:49,829 [INFO] Bot zastaven
+2026-04-06 13:58:52,444 [INFO] Bot startuje
+2026-04-06 13:59:15,246 [INFO] Bot zastaven
+2026-04-06 14:35:30,455 [INFO] Bot startuje
+2026-04-06 14:35:40,312 [INFO] TwelveData: EUR/USD 1day (20 svicek)
+2026-04-06 14:35:48,792 [INFO] TwelveData: EUR/USD 1h (50 svicek)
+2026-04-06 14:35:57,302 [INFO] TwelveData: EUR/USD 15min (50 svicek)
+2026-04-06 14:36:05,806 [INFO] TwelveData: EUR/USD 5min (30 svicek)
+2026-04-06 14:41:24,319 [INFO] Bot zastaven
+2026-04-06 15:05:02,958 [INFO] Bot startuje
+2026-04-06 15:05:30,248 [INFO] TwelveData: USD/CNH 1day (20 svicek)
+2026-04-06 15:05:38,815 [INFO] TwelveData: USD/CNH 1h (50 svicek)
+2026-04-06 15:05:47,302 [INFO] TwelveData: USD/CNH 15min (50 svicek)
+2026-04-06 15:05:55,804 [INFO] TwelveData: USD/CNH 5min (30 svicek)
+2026-04-06 15:09:04,668 [INFO] Ztrata #1/7
+2026-04-06 15:09:16,877 [INFO] TwelveData: AUD/JPY 1day (20 svicek)
+2026-04-06 15:09:25,321 [INFO] TwelveData: AUD/JPY 1h (50 svicek)
+2026-04-06 15:09:33,774 [INFO] TwelveData: AUD/JPY 15min (50 svicek)
+2026-04-06 15:09:42,214 [INFO] TwelveData: AUD/JPY 5min (30 svicek)
+2026-04-06 15:13:09,158 [INFO] Cache hit AUD/JPY (vek: 198s) - rychla aktualizace
+2026-04-06 15:13:09,158 [INFO] Rychla aktualizace: AUD/JPY
+2026-04-06 15:13:09,629 [INFO] TwelveData: AUD/JPY 15min (20 svicek)
+2026-04-06 15:13:18,061 [INFO] TwelveData: AUD/JPY 5min (20 svicek)
+2026-04-06 15:15:29,255 [INFO] TwelveData: EUR/CAD 1day (20 svicek)
+2026-04-06 15:15:37,708 [INFO] TwelveData: EUR/CAD 1h (50 svicek)
+2026-04-06 15:15:46,143 [INFO] TwelveData: EUR/CAD 15min (50 svicek)
+2026-04-06 15:15:54,573 [INFO] TwelveData: EUR/CAD 5min (30 svicek)
+2026-04-06 15:19:06,350 [INFO] Ztrata #2/7
+2026-04-06 15:19:24,801 [INFO] TwelveData: AUD/USD 1day (20 svicek)
+2026-04-06 15:19:33,363 [INFO] TwelveData: AUD/USD 1h (50 svicek)
+2026-04-06 15:19:41,790 [INFO] TwelveData: AUD/USD 15min (50 svicek)
+2026-04-06 15:19:50,286 [INFO] TwelveData: AUD/USD 5min (30 svicek)
+2026-04-06 15:23:15,105 [INFO] Ztrata #3/7
+2026-04-06 15:23:24,513 [INFO] Cache hit AUD/USD (vek: 206s) - rychla aktualizace
+2026-04-06 15:23:24,513 [INFO] Rychla aktualizace: AUD/USD
+2026-04-06 15:23:24,922 [INFO] TwelveData: AUD/USD 15min (20 svicek)
+2026-04-06 15:23:33,362 [INFO] TwelveData: AUD/USD 5min (20 svicek)
+2026-04-06 15:26:14,851 [INFO] Ztrata #4/7
+2026-04-06 15:26:17,081 [INFO] Ztrata #5/7
+2026-04-06 15:26:27,450 [INFO] TwelveData: GBP/USD 1day (20 svicek)
+2026-04-06 15:26:35,909 [INFO] TwelveData: GBP/USD 1h (50 svicek)
+2026-04-06 15:26:44,339 [INFO] TwelveData: GBP/USD 15min (50 svicek)
+2026-04-06 15:26:52,781 [INFO] TwelveData: GBP/USD 5min (30 svicek)
+2026-04-06 15:29:58,220 [INFO] Ztrata #6/7
+2026-04-06 15:30:08,947 [INFO] TwelveData: CAD/JPY 1day (20 svicek)
+2026-04-06 15:30:17,372 [INFO] TwelveData: CAD/JPY 1h (50 svicek)
+2026-04-06 15:30:25,831 [INFO] TwelveData: CAD/JPY 15min (50 svicek)
+2026-04-06 15:30:34,277 [INFO] TwelveData: CAD/JPY 5min (30 svicek)
+2026-04-06 15:34:43,012 [INFO] Cache hit CAD/JPY (vek: 240s) - rychla aktualizace
+2026-04-06 15:34:43,012 [INFO] Rychla aktualizace: CAD/JPY
+2026-04-06 15:34:43,483 [INFO] TwelveData: CAD/JPY 15min (20 svicek)
+2026-04-06 15:34:51,957 [INFO] TwelveData: CAD/JPY 5min (20 svicek)
+2026-04-06 15:39:45,207 [INFO] Cache hit CAD/JPY (vek: 293s) - rychla aktualizace
+2026-04-06 15:39:45,207 [INFO] Rychla aktualizace: CAD/JPY
+2026-04-06 15:39:45,676 [INFO] TwelveData: CAD/JPY 15min (20 svicek)
+2026-04-06 15:39:54,147 [INFO] TwelveData: CAD/JPY 5min (20 svicek)
+2026-04-06 15:43:11,087 [INFO] Ztrata #7/7
+2026-04-06 15:46:16,902 [INFO] Bot zastaven
+2026-04-06 15:46:19,050 [INFO] Bot startuje
+2026-04-06 16:07:01,709 [INFO] TwelveData: AUD/USD 1day (20 svicek)
+2026-04-06 16:07:10,178 [INFO] TwelveData: AUD/USD 1h (50 svicek)
+2026-04-06 16:07:18,663 [INFO] TwelveData: AUD/USD 15min (50 svicek)
+2026-04-06 16:07:27,109 [INFO] TwelveData: AUD/USD 5min (30 svicek)
+2026-04-06 16:10:10,754 [INFO] Ztrata #1/7
+2026-04-06 16:10:20,838 [INFO] Cache hit AUD/USD (vek: 165s) - rychla aktualizace
+2026-04-06 16:10:20,838 [INFO] Rychla aktualizace: AUD/USD
+2026-04-06 16:10:21,299 [INFO] TwelveData: AUD/USD 15min (20 svicek)
+2026-04-06 16:10:29,741 [INFO] TwelveData: AUD/USD 5min (20 svicek)
+2026-04-06 16:13:10,600 [INFO] TwelveData: EUR/USD 1day (20 svicek)
+2026-04-06 16:13:19,111 [INFO] TwelveData: EUR/USD 1h (50 svicek)
+2026-04-06 16:13:27,605 [INFO] TwelveData: EUR/USD 15min (50 svicek)
+2026-04-06 16:13:36,073 [INFO] TwelveData: EUR/USD 5min (30 svicek)
+2026-04-06 16:13:46,846 [INFO] Ztrata #2/7
+2026-04-06 16:15:58,161 [INFO] TwelveData: GBP/USD 1day (20 svicek)
+2026-04-06 16:16:06,583 [INFO] TwelveData: GBP/USD 1h (50 svicek)
+2026-04-06 16:16:15,004 [INFO] TwelveData: GBP/USD 15min (50 svicek)
+2026-04-06 16:16:23,445 [INFO] TwelveData: GBP/USD 5min (30 svicek)
+2026-04-06 16:19:06,290 [INFO] Ztrata #3/7
+2026-04-06 16:19:31,796 [INFO] TwelveData: AUD/NZD 1day (20 svicek)
+2026-04-06 16:19:40,215 [INFO] TwelveData: AUD/NZD 1h (50 svicek)
+2026-04-06 16:19:48,644 [INFO] TwelveData: AUD/NZD 15min (50 svicek)
+2026-04-06 16:19:57,086 [INFO] TwelveData: AUD/NZD 5min (30 svicek)
+2026-04-06 17:07:24,890 [INFO] Bot startuje
+2026-04-06 17:07:58,120 [INFO] TwelveData: AUD/NZD 1day (20 svicek)
+2026-04-06 17:08:06,593 [INFO] TwelveData: AUD/NZD 1h (50 svicek)
+2026-04-06 17:08:15,039 [INFO] TwelveData: AUD/NZD 15min (50 svicek)
+2026-04-06 17:08:23,541 [INFO] TwelveData: AUD/NZD 5min (30 svicek)
+2026-04-06 17:11:38,999 [INFO] TwelveData: EUR/CAD 1day (20 svicek)
+2026-04-06 17:11:47,474 [INFO] TwelveData: EUR/CAD 1h (50 svicek)
+2026-04-06 17:11:55,910 [INFO] TwelveData: EUR/CAD 15min (50 svicek)
+2026-04-06 17:12:04,380 [INFO] TwelveData: EUR/CAD 5min (30 svicek)
+2026-04-06 17:15:04,842 [INFO] Ztrata #1/7
+2026-04-06 17:19:40,718 [INFO] TwelveData: USD/JPY 1day (20 svicek)
+2026-04-06 17:19:49,210 [INFO] TwelveData: USD/JPY 1h (50 svicek)
+2026-04-06 17:19:57,685 [INFO] TwelveData: USD/JPY 15min (50 svicek)
+2026-04-06 17:20:06,144 [INFO] TwelveData: USD/JPY 5min (30 svicek)
+2026-04-06 17:23:06,607 [INFO] Ztrata #2/7
+2026-04-07 21:43:01,252 [INFO] Bot startuje
+2026-04-07 21:43:35,864 [INFO] TwelveData: GBP/JPY 1day (20 svicek)
+2026-04-07 21:43:44,337 [INFO] TwelveData: GBP/JPY 1h (50 svicek)
+2026-04-07 21:43:52,806 [INFO] TwelveData: GBP/JPY 15min (50 svicek)
+2026-04-07 21:44:01,226 [INFO] TwelveData: GBP/JPY 5min (30 svicek)
+2026-04-07 21:45:26,580 [INFO] Bot zastaven
+2026-04-07 21:45:28,438 [INFO] Bot startuje
+2026-04-07 21:45:36,455 [INFO] TwelveData: GBP/JPY 1day (20 svicek)
+2026-04-07 21:45:44,897 [INFO] TwelveData: GBP/JPY 1h (50 svicek)
+2026-04-07 21:45:53,347 [INFO] TwelveData: GBP/JPY 15min (50 svicek)
+2026-04-07 21:46:02,017 [INFO] TwelveData: GBP/JPY 5min (30 svicek)
+2026-04-07 21:46:25,369 [INFO] Bot zastaven
+2026-04-07 22:58:39,239 [INFO] Bot startuje
+2026-04-07 22:59:04,506 [INFO] TwelveData: USD/CAD 1day (20 svicek)
+2026-04-07 22:59:12,940 [INFO] TwelveData: USD/CAD 1h (50 svicek)
+2026-04-07 22:59:21,399 [INFO] TwelveData: USD/CAD 15min (50 svicek)
+2026-04-07 22:59:29,843 [INFO] TwelveData: USD/CAD 5min (30 svicek)
+2026-04-08 11:35:35,765 [INFO] Bot startuje
+2026-04-08 11:35:52,407 [INFO] TwelveData: EUR/USD 1day (20 svicek)
+2026-04-08 11:36:01,430 [INFO] TwelveData: EUR/USD 1h (50 svicek)
+2026-04-08 11:36:09,887 [INFO] TwelveData: EUR/USD 15min (50 svicek)
+2026-04-08 11:36:18,480 [INFO] TwelveData: EUR/USD 5min (30 svicek)
+2026-04-08 11:39:43,460 [INFO] Bot zastaven
+2026-04-08 11:39:45,090 [INFO] Bot startuje
+2026-04-08 11:39:53,504 [INFO] TwelveData: EUR/USD 1day (20 svicek)
+2026-04-08 11:40:01,997 [INFO] TwelveData: EUR/USD 1h (50 svicek)
+2026-04-08 11:40:10,573 [INFO] TwelveData: EUR/USD 15min (50 svicek)
+2026-04-08 11:40:19,048 [INFO] TwelveData: EUR/USD 5min (30 svicek)
+2026-04-08 11:40:45,745 [INFO] TwelveData: USD/CNH 1day (20 svicek)
+2026-04-08 11:40:54,422 [INFO] TwelveData: USD/CNH 1h (50 svicek)
+2026-04-08 11:41:02,881 [INFO] TwelveData: USD/CNH 15min (50 svicek)
+2026-04-08 11:41:11,351 [INFO] TwelveData: USD/CNH 5min (30 svicek)
+2026-04-08 11:41:38,448 [INFO] TwelveData: NZD/JPY 1day (20 svicek)
+2026-04-08 11:41:46,895 [INFO] TwelveData: NZD/JPY 1h (50 svicek)
+2026-04-08 11:41:55,326 [INFO] TwelveData: NZD/JPY 15min (50 svicek)
+2026-04-08 11:42:03,960 [INFO] TwelveData: NZD/JPY 5min (30 svicek)
+2026-04-09 20:50:53,542 [INFO] Bot startuje
+2026-04-09 20:51:10,214 [INFO] TwelveData: EUR/CAD 1day (20 svicek)
+2026-04-09 20:51:19,199 [INFO] TwelveData: EUR/CAD 1h (50 svicek)
+2026-04-09 20:51:27,683 [INFO] TwelveData: EUR/CAD 15min (50 svicek)
+2026-04-09 20:51:36,455 [INFO] TwelveData: EUR/CAD 5min (30 svicek)
+2026-04-09 20:52:02,882 [INFO] Bot zastaven
+2026-04-09 20:52:05,285 [INFO] Bot startuje
+2026-04-09 20:52:16,862 [INFO] TwelveData: EUR/CAD 1day (20 svicek)
+2026-04-09 20:52:25,425 [INFO] TwelveData: EUR/CAD 1h (50 svicek)
+2026-04-09 20:52:34,260 [INFO] TwelveData: EUR/CAD 15min (50 svicek)
+2026-04-09 20:52:43,317 [INFO] TwelveData: EUR/CAD 5min (30 svicek)
+2026-04-09 20:53:02,613 [INFO] Bot zastaven
+2026-04-09 21:01:17,310 [INFO] Bot startuje
+2026-04-09 21:01:26,946 [INFO] TwelveData: EUR/CAD 1day (20 svicek)
+2026-04-09 21:01:35,525 [INFO] TwelveData: EUR/CAD 1h (50 svicek)
+2026-04-09 21:01:44,081 [INFO] TwelveData: EUR/CAD 15min (50 svicek)
+2026-04-09 21:01:52,573 [INFO] TwelveData: EUR/CAD 5min (30 svicek)
+2026-04-09 21:09:08,762 [INFO] Bot zastaven
+2026-04-09 21:09:10,926 [INFO] Bot startuje
+2026-04-09 21:09:20,461 [INFO] TwelveData: EUR/CAD 1day (20 svicek)
+2026-04-09 21:09:28,987 [INFO] TwelveData: EUR/CAD 1h (50 svicek)
+2026-04-09 21:09:37,519 [INFO] TwelveData: EUR/CAD 15min (50 svicek)
+2026-04-09 21:09:46,006 [INFO] TwelveData: EUR/CAD 5min (30 svicek)
+2026-04-09 21:13:03,995 [INFO] Ztrata #1/7
+2026-04-09 21:13:13,827 [INFO] Bot zastaven
+2026-04-14 11:50:51,368 [INFO] Bot startuje
+2026-04-14 11:51:22,205 [INFO] TwelveData: EUR/GBP 1day (20 svicek)
+2026-04-14 11:51:30,677 [INFO] TwelveData: EUR/GBP 1h (50 svicek)
+2026-04-14 11:51:39,144 [INFO] TwelveData: EUR/GBP 15min (50 svicek)
+2026-04-14 11:51:47,595 [INFO] TwelveData: EUR/GBP 5min (30 svicek)
+2026-04-14 11:52:10,784 [INFO] Bot zastaven
+2026-07-29 17:45:15,431 [INFO] Bot startuje
+2026-07-29 17:47:32,196 [INFO] TwelveData: EUR/USD 1day (20 svicek)
+2026-07-29 17:47:40,663 [INFO] TwelveData: EUR/USD 1h (50 svicek)
+2026-07-29 17:47:49,143 [INFO] TwelveData: EUR/USD 15min (50 svicek)
+2026-07-29 17:47:57,581 [INFO] TwelveData: EUR/USD 5min (30 svicek)
+2026-07-29 17:48:35,797 [INFO] Bot zastaven
+2026-07-29 18:00:11,751 [INFO] Bot startuje
+2026-07-29 18:00:25,973 [INFO] TwelveData: EUR/USD 1day (20 svicek)
+2026-07-29 18:00:29,395 [INFO] Bot zastaven
+2026-07-29 18:00:32,690 [INFO] Bot startuje
+2026-07-29 18:00:41,614 [INFO] TwelveData: EUR/USD 1day (20 svicek)
+2026-07-29 18:00:50,501 [INFO] TwelveData: EUR/USD 1h (50 svicek)
+2026-07-29 18:00:59,353 [INFO] TwelveData: EUR/USD 15min (50 svicek)
+2026-07-29 18:01:09,220 [INFO] TwelveData: EUR/USD 5min (30 svicek)
+2026-07-29 18:02:39,869 [INFO] Bot zastaven
+2026-07-29 18:05:05,518 [INFO] Bot startuje
+2026-07-29 18:11:33,303 [INFO] TwelveData: EUR/USD 1day (20 svicek)
+2026-07-29 18:11:41,767 [INFO] TwelveData: EUR/USD 1h (50 svicek)
+2026-07-29 18:11:50,206 [INFO] TwelveData: EUR/USD 15min (50 svicek)
+2026-07-29 18:11:58,649 [INFO] TwelveData: EUR/USD 5min (30 svicek)
+2026-07-29 18:17:26,305 [INFO] TwelveData: USD/JPY 1day (20 svicek)
+2026-07-29 18:17:34,746 [INFO] TwelveData: USD/JPY 1h (50 svicek)
+2026-07-29 18:17:43,199 [INFO] TwelveData: USD/JPY 15min (50 svicek)
+2026-07-29 18:17:51,645 [INFO] TwelveData: USD/JPY 5min (30 svicek)
+2026-07-29 18:18:59,534 [INFO] TwelveData: USD/CAD 1day (20 svicek)
+2026-07-29 18:19:08,054 [INFO] TwelveData: USD/CAD 1h (50 svicek)
+2026-07-29 18:19:16,824 [INFO] TwelveData: USD/CAD 15min (50 svicek)
+2026-07-29 18:19:25,360 [INFO] TwelveData: USD/CAD 5min (30 svicek)
+2026-07-29 18:27:23,993 [INFO] Cache expirovala pro USD/CAD - stahuji vse
+2026-07-29 18:27:24,544 [INFO] TwelveData: USD/CAD 1day (20 svicek)
+2026-07-29 18:27:33,045 [INFO] TwelveData: USD/CAD 1h (50 svicek)
+2026-07-29 18:27:41,499 [INFO] TwelveData: USD/CAD 15min (50 svicek)
+2026-07-29 18:27:50,966 [INFO] TwelveData: USD/CAD 5min (30 svicek)
+2026-07-29 18:31:13,085 [INFO] Bot zastaven
+2026-07-29 18:39:28,444 [INFO] Bot startuje
+2026-07-29 18:39:39,170 [INFO] TwelveData: EUR/GBP 1day (20 svicek)
+2026-07-29 18:39:47,644 [INFO] TwelveData: EUR/GBP 1h (50 svicek)
+2026-07-29 18:39:56,223 [INFO] TwelveData: EUR/GBP 15min (50 svicek)
+2026-07-29 18:40:04,812 [INFO] TwelveData: EUR/GBP 5min (30 svicek)
+2026-07-29 18:40:34,353 [INFO] TwelveData: AUD/NZD 1day (20 svicek)
+2026-07-29 18:40:42,858 [INFO] TwelveData: AUD/NZD 1h (50 svicek)
+2026-07-29 18:40:51,313 [INFO] TwelveData: AUD/NZD 15min (50 svicek)
+2026-07-29 18:40:59,763 [INFO] TwelveData: AUD/NZD 5min (30 svicek)
+2026-07-29 18:56:00,781 [INFO] Bot zastaven

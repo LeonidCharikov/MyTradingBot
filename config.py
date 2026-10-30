@@ -8,6 +8,9 @@ MAX_TRADES_PER_DAY = 30       # Max signalu za den
  
 MODE = "demo"                # "demo" nebo "real"
 SCAN_INTERVAL = 60           # Interval skenovani v sekundach
+# "old" = Původní logika (BPU, LP, modely z PDF)
+# "new" = Nová logika (SMC, Likvidita, 5min odrazy)
+ANALYSIS_METHOD = "new"
 INTERACTIVE_MODE = True
  # Vikend filter
 WEEKEND_FILTER_ENABLED = True
@@ -16,7 +19,7 @@ WEEKEND_FILTER_ENABLED = True
 # ============================================================
  
 # Minimalni prah pro signal
-SIGNAL_MIN_CONDITIONS = 6    # Pod timto = zadny signal (ne VELMI SLABY)
+SIGNAL_MIN_CONDITIONS = 3    # Pod timto = zadny signal (ne VELMI SLABY)
 
 # Casove filtry (UTC cas)
 SESSION_LONDON_START = 7     # London open 07:00 UTC
@@ -51,10 +54,10 @@ TREND_LOOKBACK_D1 = 5        # D1: staci 5 svicek pro smerovy kontext
 TREND_LOOKBACK_1H = 8        # 1H: posledních 8 hodin
  
 # Urovne - detekce
-LEVEL_LP_TOLERANCE = 0.05    # Tolerance pro limitniho hrace (5% ATR)
+LEVEL_LP_TOLERANCE = 0.10    # Tolerance pro limitniho hrace (5% ATR)
 LEVEL_MIRROR_TOLERANCE = 0.1 # Tolerance pro zrcadlovy level (10% ATR)
 LEVEL_PARANORMAL_MULT = 2.0  # Paranormalni bar = > 2x ATR
-LEVEL_MIN_TOUCHES = 3        # Min dotyku pro limitniho hrace
+LEVEL_MIN_TOUCHES = 2        # Min dotyku pro limitniho hrace
  
 # Odboj - predpoklady (check_bounce_prerequisites)
 BOUNCE_PULLBACK_MAX = 0.4        # Max pullback = 40% celkoveho pohybu
@@ -78,7 +81,7 @@ BREAKOUT_MAX_OBSTACLES = 2       # Max prekazek pred uroven
 BREAKOUT_OBSTACLE_MULT = 3.0     # Zona prekazek = 3x ATR
  
 # Odboj model - BPU parametry
-BOUNCE_TOLERANCE = 0.1       # Tolerance pro BPU hit (10% ATR)
+BOUNCE_TOLERANCE = 0.2       # Tolerance pro BPU hit (10% ATR)
 BOUNCE_LUFT = 0.2            # Luft = 20% stopu (z PDF)
  
 # LP model - lozny proboj
@@ -97,9 +100,9 @@ CHECKLIST_MIN_RRR = 1.0          # Min RRR 1:1
  
 # Sila signalu - pocet splnenych podminek
 
-SIGNAL_STRONG_MIN = 12        # SILNY = 7+ podminek
-SIGNAL_MEDIUM_MIN = 59       # STREDNI = 5-6 podminek
-SIGNAL_WEAK_MIN = 6          # SLABY = 3-4 podminky
+SIGNAL_STRONG_MIN = 8        # SILNY = 7+ podminek
+SIGNAL_MEDIUM_MIN = 6       # STREDNI = 5-6 podminek
+SIGNAL_WEAK_MIN = 4          # SLABY = 3-4 podminky
  
 # Cache - opakovana analyza stejneho symbolu
 CACHE_FAST_MINUTES = 5       # Pri opakovani pouzij data starsi max 5 min

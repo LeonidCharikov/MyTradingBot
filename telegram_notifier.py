@@ -54,6 +54,10 @@ def send_main_menu():
                 {"text": "📈 Indexy", "callback_data": "menu_indices"}
             ],
             [
+                {"text": "🔍 Sken Forex", "callback_data": "scan_forex"},
+                {"text": "🔍 Sken Krypto", "callback_data": "scan_crypto"}
+            ],
+            [
                 {"text": "📊 Statistiky", "callback_data": "stats"},
                 {"text": "📋 Status", "callback_data": "status"}
             ],
